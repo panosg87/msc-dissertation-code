@@ -12,7 +12,7 @@ class Problem:
 
     def __init__(self, filename):
         self.filename = filename
-        self.rooms = filename.split('_')[2]
+        self.rooms = int(filename.split('_')[2])
         self.load = float(filename.split('_')[4].replace(',', '.'))
         # TODO: parse the capacity from the file.
         # The capacity is to all the files 480. However, this should be parsed
