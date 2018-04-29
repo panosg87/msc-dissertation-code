@@ -6,12 +6,13 @@ class Problem:
 
     It is responsible of parsing the TXT file and holding all the necessary
     parameters.
+
+    An example of a TXT file: 1_ordays_5_load_0,8_1.txt
     """
 
     def __init__(self, filename):
         self.filename = filename
         self.rooms = filename.split('_')[2]
-        self.durations = None
         self.load = float(filename.split('_')[4].replace(',', '.'))
         # TODO: parse the capacity from the file.
         # The capacity is to all the files 480. However, this should be parsed
@@ -19,6 +20,7 @@ class Problem:
         self.capacity = 480
         self.solutions = []
         self.raw_parameters = self._parse_file()
+        self.durations = self._calc_stats()
 
     @staticmethod
     def _read_file(filename):
@@ -58,10 +60,13 @@ class Problem:
     def _calc_mean(m, s, g):
         """Calculate the estimated duration, in minutes.
 
+        The three parameters corresponds to the 3-paramater
+        log normal distribution.
+
         Args:
-             m():
-             s():
-             g():
+             m (float)
+             s (float)
+             g (float)
         """
         return g + (math.e ** (m + (s ** 2) / 2))
 
